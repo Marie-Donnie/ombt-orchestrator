@@ -41,3 +41,9 @@
   roles:
     - { role: qdr,
         when: broker == "qdr" }
+
+- name: CockroachDB
+  hosts:
+    - cockroachdb
+  roles:
+    - cockroachdb
