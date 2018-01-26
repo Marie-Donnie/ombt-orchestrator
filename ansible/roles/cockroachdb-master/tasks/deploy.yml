@@ -1,4 +1,5 @@
-- name: Start cockroachdb
+---
+- name: Start cockroachdb master
   docker_container:
     name: "cockroachdb-master"
     image: "cockroachdb/cockroach"

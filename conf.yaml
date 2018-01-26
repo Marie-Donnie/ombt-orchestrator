@@ -33,7 +33,7 @@ g5k:
           - influxdb
           - grafana
           - chrony-server
-          - cochroachdb-master
+          - cockroachdb-master
         cluster: paravance
         nodes: 1
         primary_network: n1
