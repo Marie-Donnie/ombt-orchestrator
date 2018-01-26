@@ -34,7 +34,7 @@ g5k:
           - grafana
           - chrony-server
           - cockroachdb
-          - cochroachdb-master
+          - cochroachdb_master
         cluster: paravance
         nodes: 1
         primary_network: n1

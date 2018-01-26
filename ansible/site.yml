@@ -44,7 +44,7 @@
 
 - name: CockroachDB master deployment
   hosts:
-    - cockroachdb-master
+    - cockroachdb_master
   roles:
     - cockroachdb
 

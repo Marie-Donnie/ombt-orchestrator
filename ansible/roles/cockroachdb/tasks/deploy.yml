@@ -1,12 +1,12 @@
 - name: Start cockroachdb
   docker_container:
-    name: "cockroachdb-master"
+    name: "cockroachdb_master"
     image: "cockroachdb/cockroach"
     hostname: "{{ inventory_hostname }}"
     detach: True
     ports: 26257
     command: start --insecure
-  when: inventory_hostname in groups['cockroachdb-master']
+  when: inventory_hostname in groups['cockroachdb_master']
 
 
 - name: Start cockroachdb
