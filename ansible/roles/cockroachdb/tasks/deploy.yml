@@ -5,4 +5,4 @@
     hostname: "{{ inventory_hostname }}"
     detach: True
     ports: 26257
-    command: cockroach start --insecure
+    command: start --insecure
