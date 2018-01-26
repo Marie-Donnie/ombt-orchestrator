@@ -2,7 +2,8 @@
   docker_container:
     name: "cockroachdb"
     image: "cockroachdb/cockroach"
-    hostname: "{{ item.router_id }}"
+    hostname: "{{ item.name }}"
     detach: True
     ports: 26257
     command: "cockroachdb/cockroach:v1.1.4 start --insecure"
+  with_items: "{{ ombt_confs[inventoy_hostname] }}"
