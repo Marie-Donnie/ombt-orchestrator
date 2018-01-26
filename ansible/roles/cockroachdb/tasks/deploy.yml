@@ -6,7 +6,7 @@
     detach: True
     ports: 26257
     command: start --insecure
-    when: inventory_hostname in groups['cockroachdb-master']
+  when: inventory_hostname in groups['cockroachdb-master']
 
 
 - name: Start cockroachdb
@@ -17,4 +17,4 @@
     detach: True
     ports: 26257
     command: start --insecure --join=cockroachdb-master
-    when: inventory_hostname in groups['cockroachdb']
+  when: inventory_hostname in groups['cockroachdb']
