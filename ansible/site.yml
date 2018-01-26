@@ -42,7 +42,14 @@
     - { role: qdr,
         when: broker == "qdr" }
 
-- name: CockroachDB
+- name: CockroachDB master deployment
+  hosts:
+    - cockroachdb-master
+  roles:
+    - cockroachdb
+
+
+- name: CockroachDB deployment
   hosts:
     - cockroachdb
   roles:

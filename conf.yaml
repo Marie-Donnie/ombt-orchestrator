@@ -34,7 +34,8 @@ g5k:
           - grafana
           - chrony-server
           - cockroachdb
-        cluster: parasilo
+          - cochroachdb-master
+        cluster: paravance
         nodes: 1
         primary_network: n1
         secondary_networks: []
@@ -43,7 +44,7 @@ g5k:
           - telegraf
           - chrony
           - cockroachdb
-        cluster: parasilo
+        cluster: paravance
         nodes: 1
         primary_network: n1
         secondary_networks: []
@@ -52,7 +53,7 @@ g5k:
           - telegraf
           - chrony
           - cockroachdb
-        cluster: parasilo
+        cluster: paravance
         nodes: 1
         primary_network: n1
         secondary_networks: []
@@ -61,7 +62,7 @@ g5k:
           - telegraf
           - chrony
           - cockroachdb
-        cluster: parasilo
+        cluster: paravance
         nodes: 1
         primary_network: n1
         secondary_networks: []
