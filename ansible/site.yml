@@ -53,3 +53,15 @@
     - cockroachdb
   roles:
     - cockroachdb
+
+- name: MariaDB master deployment
+  hosts:
+    - mariadb-master
+  roles:
+    - mariadb-master
+
+- name: MariaDB deployment
+  hosts:
+    - mariadb
+  roles:
+    - mariadb
