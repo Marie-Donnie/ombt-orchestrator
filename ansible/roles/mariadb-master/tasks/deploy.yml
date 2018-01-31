@@ -17,15 +17,17 @@
     name: "mariadb-master"
     image: "mariadb"
     detach: True
-    ports:
-      - 3306:3306
-      - 4567:4567/udp
-      - 4567:4567
-      - 4568:4568
-      - 4444:4444
+    exposed_ports:
+      - 4567
+    published_ports:
+      - "3306:3306"
+      - "4567:4567"
+      - "4567:4567/udp"
+      - "4568:4568"
+      - "4444:4444"
     volumes:
-      - /opt/local/etc/mysql.conf.d:/etc/mysql/conf.d
-      - /mnt/data:/var/lib/mysql
+      - "/opt/local/etc/mysql.conf.d:/etc/mysql/conf.d"
+      - "/mnt/data:/var/lib/mysql"
     env:
       MYSQL_INITDB_SKIP_TZINFO=yes
       MYSQL_ROOT_PASSWORD=my-secret-pw
