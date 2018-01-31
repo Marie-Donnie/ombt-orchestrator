@@ -12,9 +12,7 @@ logging.basicConfig(level=logging.DEBUG)
 DEFAULT_CONF = os.path.dirname(os.path.realpath(__file__))
 DEFAULT_CONF = os.path.join(DEFAULT_CONF, "conf.yaml")
 PROVIDERS = {
-    "g5k": t.g5k,
-    "vagrant": t.vagrant,
-    "chameleon": t.chameleon
+    "g5k": t.g5k
 }
 
 
@@ -25,9 +23,8 @@ def cli():
 
 
 @cli.command(help="Claim resources from a provider and configure them")
-@click.argument('broker')
 @click.option("--provider",
-    default="vagrant",
+    default="g5k",
     help="Deploy with the given provider")
 @click.option("--force",
     is_flag=True)
@@ -36,27 +33,20 @@ def cli():
     help="Configuration file to use")
 @click.option("--env",
     help="Use this environment directory instead of the default one")
-def deploy(broker, provider, force, conf, env):
+def deploy(provider, force, conf, env):
     config = {}
     with open(conf) as f:
         config = yaml.load(f)
     p = PROVIDERS[provider]
 
-    p(broker=broker, force=force, config=config, env=env)
+    p(force=force, config=config, env=env)
     t.inventory()
-    t.prepare(broker=broker)
 
 
 @cli.command(help="Claim resources on Grid'5000 (from a frontend)")
 @click.option("--force", is_flag=True, help="force redeploy")
 def g5k(force):
     t.g5k(force)
-
-
-@cli.command(help="Claim resources on vagrant (local machine)")
-@click.option("--force",is_flag=True, help="force redeploy")
-def vagrant(force):
-    t.vagrant(force)
 
 
 @cli.command(help="Generate the Ansible inventory file. [after g5k,vagrant]")
@@ -120,9 +110,8 @@ def backup():
     t.backup()
 
 @cli.command()
-@click.argument('broker')
 @click.option("--provider",
-    default="vagrant",
+    default="g5k",
     help="Deploy with the given provider")
 @click.option("--conf",
     default=DEFAULT_CONF,
@@ -132,7 +121,7 @@ def backup():
     help="Launch a test campaign given a test")
 @click.option("--env",
     help="Use this environment directory instead of the default one")
-def campaign(broker, provider, conf, test, env):
+def campaign(provider, conf, test, env):
 
     def generate_id(params):
         def clean(s):
@@ -203,7 +192,7 @@ def campaign(broker, provider, conf, test, env):
         name=test
     )
     params = sweeper.get_next(sort_params_by_nbr_clients)
-    PROVIDERS[provider](broker=broker, config=config, env=test)
+    PROVIDERS[provider](config=config, env=test)
     t.inventory()
 
     while params:
@@ -211,7 +200,6 @@ def campaign(broker, provider, conf, test, env):
         params.update({
             "backup_dir": generate_id(params)
         })
-        t.prepare(broker=broker)
         t.test_case_1(**params)
         sweeper.done(params)
         dump_param(params)

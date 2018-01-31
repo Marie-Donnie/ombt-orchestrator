@@ -23,25 +23,6 @@
   roles:
     - grafana
 
-- name: Control-bus deployment
-  hosts: control-bus
-  roles:
-      - rabbitmq-control
-
-- name: RabbitMQ deployment
-  hosts:
-    - bus
-  roles:
-    - { role: rabbitmq,
-        when: broker == "rabbitmq" }
-
-- name: Qpid dispatch deployment
-  hosts:
-    - bus
-  roles:
-    - { role: qdr,
-        when: broker == "qdr" }
-
 - name: CockroachDB master deployment
   hosts:
     - cockroachdb-master
