@@ -1,15 +1,5 @@
 [global_tags]
-{% if inventory_hostname in groups["ombt-server"] %}
- role = "ombt-server"
-{% elif inventory_hostname in groups["ombt-client"] %}
-  role = "ombt-client"
-{% elif inventory_hostname in groups["bus"] %}
-  role = "bus"
-{% elif inventory_hostname in groups["control-bus"] %}
-  role = "control-bus"
-{% else %}
   role = "default"
-{% endif %}
 
 [agent]
   interval = "5s"
@@ -45,4 +35,4 @@
 {% endif %}
 [[outputs.influxdb]]
   urls = ["http://{{ hostvars[groups['influxdb'][0]]['ansible_' + control_network].ipv4.address }}:8086"]
-  database = "ombt-orchestrator"
+  database = "influxdb"

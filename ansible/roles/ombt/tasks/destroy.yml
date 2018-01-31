@@ -1,8 +1,0 @@
----
-- name: Remove ombt containers on all ombt-nodes
-  shell: docker ps -a | awk '{ print $1,$2 }' | grep ombt | awk '{print $1 }' | xargs -I {} docker rm -f {}
-
-- name: Removing all datas
-  file:
-    path: /tmp/ombt-data
-    state: absent

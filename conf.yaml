@@ -9,11 +9,6 @@ campaign:
     version: ["beyondtheclouds/ombt:latest"]
     length: [1024]
     executor: ["eventlet"]
-rabbitmq:
-qdr:
-  type: complete_graph
-  args: [4]
-  qdr_version: msimonin/qdrouterd-collectd:0.8.0
 registry:
   type: internal
 g5k:
@@ -25,8 +20,6 @@ g5k:
   resources:
     machines:
       - roles:
-          - control-bus
-          - ombt-control
           - control
           - registry
           - telegraf
@@ -40,7 +33,6 @@ g5k:
         primary_network: n1
         secondary_networks: []
       - roles:
-          - bus
           - telegraf
           - chrony
           - cockroachdb
@@ -50,7 +42,6 @@ g5k:
         primary_network: n1
         secondary_networks: []
       - roles:
-          - ombt-server
           - telegraf
           - chrony
           - cockroachdb
@@ -60,7 +51,6 @@ g5k:
         primary_network: n1
         secondary_networks: []
       - roles:
-          - ombt-client
           - telegraf
           - chrony
           - cockroachdb
@@ -76,86 +66,3 @@ g5k:
           - internal_network
         type: prod
         site: rennes
-vagrant:
-  backend: virtualbox
-  user: root
-  box: bento/debian-9.1
-  resources:
-    machines:
-      - roles:
-        - bus
-        - telegraf
-        - chrony
-        flavor: tiny
-        number: 1
-        networks:
-          - control_network
-          - internal_network
-      - roles:
-        - ombt-client
-        - telegraf
-        - chrony
-        flavor: tiny
-        number: 1
-        networks:
-          - control_network
-          - internal_network
-      - roles:
-        - ombt-server
-        - telegraf
-        - chrony
-        flavor: tiny
-        number: 1
-        networks:
-          - control_network
-          - internal_network
-      - roles:
-        - control-bus
-        - ombt-control
-        - control
-        - registry
-        - telegraf
-        - influxdb
-        - grafana
-        - chrony-server
-        flavor: medium
-        number: 1
-        networks:
-          - control_network
-          - internal_network
-chameleon:
-    key_name: enos-matt
-    resources:
-        machines:
-          - roles:
-            - bus
-            - telegraf
-            - chrony
-            flavor: m1.medium
-            number: 1
-          - roles:
-            - ombt-client
-            - telegraf
-            - chrony
-            flavor: m1.medium
-            number: 1
-          - roles:
-            - ombt-server
-            - telegraf
-            - chrony
-            flavor: m1.medium
-            number: 1
-          - roles:
-            - control-bus
-            - ombt-control
-            - control
-            - registry
-            - telegraf
-            - influxdb
-            - grafana
-            - chrony-server
-            flavor: m1.medium
-            number: 1
-        networks:
-          - control_network
-          - internal_network
